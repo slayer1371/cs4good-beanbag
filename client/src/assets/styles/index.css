@@ -1,0 +1,16 @@
+body {
+  background: #eee;
+  padding: 0 16px;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+}
+h1{
+  color:blue;
+}
+
+.player-container{
+  display: flex;
+  flex-direction: row;
+}
+.player{
+  width: 400px;
+}

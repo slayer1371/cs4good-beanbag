@@ -1,10 +1,11 @@
+//serves as the player element with a the name and score
 import { useState } from 'react';
 
-function Player(){
+function Player(props){
     return(
         <div>
-            <h1>P1</h1>
-            <h1>Score</h1>
+            <h1>{props.title}</h1>
+            <h1>{props.totalScore}</h1>
         </div>
         
     )
