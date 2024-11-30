@@ -3,12 +3,12 @@
 import { useState } from 'react'
 import "../styles/index.css"
 import Player from './Player'
-
+import PlayerEdit from './PlayerEdit'
 function PlayerTable(props){
     console.log(props.players)
     console.log(props.players[0])
     return(
-        <div>
+        <div className = "player-container">
             {
                 props.players.map((player,index)=>{
                     return(
@@ -20,9 +20,13 @@ function PlayerTable(props){
                         ></Player>
                     );
                 })
+                
             }
+            <PlayerEdit
+            addPlayer = {props.addPlayer}
+            removePlayer = {props.removePlayer}
+            ></PlayerEdit>
         </div>
-
     );
 
 }
