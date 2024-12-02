@@ -26,3 +26,28 @@ h1{
   width: 240px;
   margin: 16px;
 }
+
+.game-grid table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.game-grid th,
+.game-grid td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 8px;
+}
+
+.game-grid th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.game-grid td {
+  background-color: #fff;
+}
+
+.game-grid tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}

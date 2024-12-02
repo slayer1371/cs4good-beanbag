@@ -3,7 +3,7 @@ import "./assets/styles/index.css"
 import PlayerTable from './assets/components/PlayerTable'
 import ScoreForm from './assets/components/ScoreForm';
 import RoundDisplay from './assets/components/RoundDisplay';
-
+import GameGrid from './assets/components/GameGrid';
 
 function App() {
   const [round, setRound] = useState(0);
@@ -29,18 +29,31 @@ function App() {
     setRound((prevValue)=>{
       return 0;
     })
+    setPlayers((prevPlayers) => 
+      prevPlayers.map((player) => {
+        return {
+          ...player,
+          totalScore: 0, // Update total score
+          scores: [], // Add the score to the scores array
+        };
+      })
+    );
     //make players empty but keep number of players
   }
   function addPlayer(){
     setPlayers((prevValue)=>{
       var newId = prevValue.length;
       console.log("adding player");
+      var adjustedScores = [];
+      for(let x=1;x<round;x++){
+        adjustedScores.push(0);
+      }
       return(
         [...prevValue, 
         {
           id: newId,
           title: "Player " + String(newId+1),
-          scores: [],
+          scores: adjustedScores,
           totalScore: 0,
         }
       ]
@@ -58,29 +71,30 @@ function App() {
     })
   }
 
-  function updateScores(newScores){
-    console.log("updating scores")
-
-    setPlayers((prevValue)=>{
-      var newPlayerList = [...prevValue];
-      newPlayerList.map((player, index)=>{
-        if(newScores[player.title] != ""){
-          newPlayerList[index].totalScore += parseInt(newScores[player.title]);
-        }
+  function updateScores(newScores) {
+    console.log("updating scores");
+  
+    setPlayers((prevPlayers) => 
+      prevPlayers.map((player) => {
+        const score = parseInt(newScores[player.title]) || 0; // Default to 0 if input is empty or invalid
+        return {
+          ...player,
+          totalScore: player.totalScore + score, // Update total score
+          scores: [...player.scores, score], // Add the score to the scores array
+        };
       })
-      return newPlayerList;
-    })
-    setRound((prevValue) =>{
-      var newRound = prevValue +=1;
-      return newRound;
-    })
+    );
+  
+    setRound((prevRound) => prevRound + 1); // Increment the round
   }
+  
 
   return (
     <div>
-      <RoundDisplay round = {round}></RoundDisplay>
+      <RoundDisplay round = {round} resetGame = {resetGame}></RoundDisplay>
       <PlayerTable players = {players} addPlayer = {addPlayer} removePlayer = {removePlayer}></PlayerTable>
       <ScoreForm players = {players} updateScores = {updateScores}></ScoreForm>
+      <GameGrid round = {round} players = {players}></GameGrid>
     </div>
     
   )

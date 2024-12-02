@@ -3,9 +3,10 @@
 import { useState } from "react";
 
 function ScoreForm({ players, updateScores }) {
+  // Initialize scores state with empty strings for all players
   const [scores, setScores] = useState(
     players.reduce((acc, player) => {
-      acc[player.title] = ""; // Initialize each player's score as an empty string
+      acc[player.title] = ""; // Ensure every player's title has a corresponding score
       return acc;
     }, {})
   );
@@ -20,7 +21,7 @@ function ScoreForm({ players, updateScores }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateScores(scores); // Pass the scores to the App's updateScores function
+    updateScores(scores); // Pass scores to the parent
     setScores(
       players.reduce((acc, player) => {
         acc[player.title] = ""; // Reset scores after submission
@@ -37,7 +38,7 @@ function ScoreForm({ players, updateScores }) {
             key={index}
             name={player.title}
             placeholder={`Enter score for ${player.title}`}
-            value={scores[player.title]} // Controlled input
+            value={scores[player.title] || ""} // Default to an empty string
             onChange={handleInputChange}
           />
         ))}
