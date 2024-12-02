@@ -6,7 +6,7 @@ import RoundDisplay from './assets/components/RoundDisplay';
 import GameGrid from './assets/components/GameGrid';
 
 function App() {
-  const [round, setRound] = useState(0);
+  const [round, setRound] = useState(1);
   const [players, setPlayers] = useState([
     {
       id:0,
@@ -45,7 +45,7 @@ function App() {
       var newId = prevValue.length;
       console.log("adding player");
       var adjustedScores = [];
-      for(let x=1;x<round;x++){
+      for(let x=0;x<round;x++){
         adjustedScores.push(0);
       }
       return(
