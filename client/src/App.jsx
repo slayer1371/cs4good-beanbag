@@ -2,9 +2,11 @@ import { useState } from 'react'
 import "./assets/styles/index.css"
 import PlayerTable from './assets/components/PlayerTable'
 import ScoreForm from './assets/components/ScoreForm';
+import RoundDisplay from './assets/components/RoundDisplay';
 
 
 function App() {
+  const [round, setRound] = useState(0);
   const [players, setPlayers] = useState([
     {
       id:0,
@@ -23,7 +25,12 @@ function App() {
       
     }
   ]);
-  
+  function resetGame(){
+    setRound((prevValue)=>{
+      return 0;
+    })
+    //make players empty but keep number of players
+  }
   function addPlayer(){
     setPlayers((prevValue)=>{
       var newId = prevValue.length;
@@ -63,11 +70,16 @@ function App() {
       })
       return newPlayerList;
     })
+    setRound((prevValue) =>{
+      var newRound = prevValue +=1;
+      return newRound;
+    })
   }
 
   return (
     <div>
-      <PlayerTable className="player-container" players = {players} addPlayer = {addPlayer} removePlayer = {removePlayer}></PlayerTable>
+      <RoundDisplay round = {round}></RoundDisplay>
+      <PlayerTable players = {players} addPlayer = {addPlayer} removePlayer = {removePlayer}></PlayerTable>
       <ScoreForm players = {players} updateScores = {updateScores}></ScoreForm>
     </div>
     

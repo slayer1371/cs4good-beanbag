@@ -6,7 +6,14 @@ body {
 h1{
   color:blue;
 }
-
+.gen-row{
+  display: flex;
+  flex-direction: row;
+}
+.gen-col{
+  display: flex;
+  flex-direction: column;
+}
 .player-container{
   display: flex;
   flex-direction: row;
