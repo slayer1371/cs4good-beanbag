@@ -1,4 +1,5 @@
 function Target() {
+  //Function when clicked using circle e
   const Count = (e) => {
     console.log(e.id);
   };
