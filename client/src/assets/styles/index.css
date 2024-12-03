@@ -3,22 +3,22 @@ body {
   padding: 0 16px;
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
-h1{
-  color:blue;
+h1 {
+  color: blue;
 }
-.gen-row{
+.gen-row {
   display: flex;
   flex-direction: row;
 }
-.gen-col{
+.gen-col {
   display: flex;
   flex-direction: column;
 }
-.player-container{
+.player-container {
   display: flex;
   flex-direction: row;
 }
-.player{
+.player {
   background: #fff;
   border-radius: 7px;
   box-shadow: 0 2px 5px #ccc;
@@ -50,4 +50,34 @@ h1{
 
 .game-grid tr:nth-child(even) td {
   background-color: #f9f9f9;
+}
+.Target {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+}
+.s100 {
+  background-color: red;
+  z-index: 1;
+}
+.s75 {
+  background-color: blue;
+  transform: scale(0.75);
+  z-index: 2;
+}
+.s50 {
+  background-color: red;
+  transform: scale(0.5);
+  z-index: 3;
+}
+.s25 {
+  background-color: blue;
+  transform: scale(0.25);
+  z-index: 4;
 }
