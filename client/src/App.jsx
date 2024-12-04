@@ -26,7 +26,7 @@ function App() {
   ]);
   function resetGame() {
     setRound((prevValue) => {
-      return 0;
+      return 1;
     });
     setPlayers((prevPlayers) =>
       prevPlayers.map((player) => {
@@ -37,7 +37,7 @@ function App() {
         };
       })
     );
-    //make players empty but keep number of players
+    
   }
   function addPlayer() {
     setPlayers((prevValue) => {
