@@ -44,7 +44,7 @@ function App() {
       var newId = prevValue.length;
       console.log("adding player");
       var adjustedScores = [];
-      for (let x = 0; x < round; x++) {
+      for (let x = 0; x < round-1; x++) {
         adjustedScores.push(0);
       }
       return [

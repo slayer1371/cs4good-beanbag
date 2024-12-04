@@ -3,7 +3,7 @@ import "../styles/index.css"
 
 function GameGrid({ players, round }) {
     // Determine the maximum number of rounds from the players' scores arrays
-    const maxRounds = Math.max(round, ...players.map((player) => player.scores.length));
+    const maxRounds = Math.max(round-1, ...players.map((player) => player.scores.length));
   
     return (
       <div className="game-grid">
