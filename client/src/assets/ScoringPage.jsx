@@ -6,7 +6,7 @@ function ScoringPage(){
   const [score, setScore] = useState(0);
 
   useEffect(()=>{
-
+    //fetch data with mongo here
   },[]);
 
   return(

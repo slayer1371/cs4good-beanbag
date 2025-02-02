@@ -1,6 +1,8 @@
 import React from "react";
 
 function Target(){
+
+
   const handleClick = (ring) => {
     alert(`You clicked on ring ${ring}`);
   };
@@ -11,7 +13,7 @@ function Target(){
         {[...Array(5)].map((_, index) => (
           <div
             key={index}
-            className={`ring ring-${index + 1}`}
+            className={`ring ring-${index}`}
             onClick={() => handleClick(index + 1)}
           />
         ))}
