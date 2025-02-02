@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from "react";
+import NavBar from "./NavBar";
 
 function ChartPage(){
   const [data, setData] = useState({});
@@ -10,6 +11,7 @@ function ChartPage(){
 
   return(
     <div>
+      <NavBar/>
 
     </div>
   

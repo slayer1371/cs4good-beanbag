@@ -1,9 +1,27 @@
+/* ND color pallet */
+
+/* 
+ND Blue: #0c2340
+Standard Dome Gold: #c99700
+Irish Green: #00843d
+ */
+
+
+
+
+/* General Styling */
+
+body{
+  margin: 0px;
+}
+
+
 /* Target styling*/
 .target-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
   background-color: #f0f0f0;
 }
 
@@ -61,4 +79,37 @@
 .ring:hover{
   transform: scale(1.1);
 
+}
+
+/* NavBar styling */
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0c2340;
+  gap: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item {
+  
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  height: 100%;
+  padding: 20px 30px;
+  cursor: pointer;
+  transition: color 0.1s ease, background-color 0.1s ease;
+  border-left: thick solid #c99700;
+}
+
+.nav-item:hover {
+  background-color: #c99700;
+}
+
+.nav-item.active {
+  background-color: #00843d;
+  color: white;
 }

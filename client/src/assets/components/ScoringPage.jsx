@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Target from "./Target";
+import NavBar from "./NavBar";
+
 function ScoringPage(){
   const [teamList, setTeamList] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
@@ -16,6 +18,7 @@ function ScoringPage(){
 
   return(
     <div>
+      <NavBar/>
       <Target selectedRing = {selectedRing} setSelectedRing = {setSelectedRing}/>
     </div>
 
