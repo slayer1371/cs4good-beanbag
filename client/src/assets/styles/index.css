@@ -24,13 +24,13 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.ring-0 {
+.ring-4 {
   width: 100%;
   height: 100%;
   background-color: #0C2340;
 }
 
-.ring-1 {
+.ring-3 {
   width: 80%;
   height: 80%;
   background-color: #0A2355;
@@ -42,24 +42,23 @@
   background-color: #06268A;
 }
 
-.ring-3 {
+.ring-1 {
   width: 40%;
   height: 40%;
   background-color: #042B96;
 }
 
-.ring-4 {
+.ring-0 {
   width: 20%;
   height: 20%;
   background-color: #003087;
 }
 
 .selected-ring{
-  transform: scale(1.1);
   background-color: #c99700;
 }
 
 .ring:hover{
   transform: scale(1.1);
-  background-color: #c99700;
+
 }
