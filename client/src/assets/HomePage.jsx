@@ -1,11 +1,12 @@
-import { useState } from "react";
-import "./assets/styles/index.css";
+import React, { useState } from "react";
 
 function HomePage(){
+
   return(
-    <>
-    </>
-  )
+    <div>
+
+    </div>
+  );
 
 }
 

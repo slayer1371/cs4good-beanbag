@@ -1,9 +1,10 @@
-import { useState } from "react";
-import "./assets/styles/index.css";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./assets/HomePage";
 import ScoringPage from "./assets/ScoringPage";
 import ChartPage from "./assets/ChartPage";
+import "./assets/styles/index.css";
+
 
 function App() {
   return(

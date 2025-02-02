@@ -1,0 +1,59 @@
+/* Target styling*/
+.target-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.target {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 5px solid white;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ring:hover {
+  transform: scale(1.1);
+}
+
+.ring-1 {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 255, 0.2);
+}
+
+.ring-2 {
+  width: 80%;
+  height: 80%;
+  background-color: rgba(0, 0, 255, 0.4);
+}
+
+.ring-3 {
+  width: 60%;
+  height: 60%;
+  background-color: rgba(0, 0, 255, 0.6);
+}
+
+.ring-4 {
+  width: 40%;
+  height: 40%;
+  background-color: rgba(0, 0, 255, 0.8);
+}
+
+.ring-5 {
+  width: 20%;
+  height: 20%;
+  background-color: rgba(0, 0, 255, 1);
+}
