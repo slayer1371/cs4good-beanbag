@@ -8,6 +8,10 @@ const navItems = [
   {
     title: "Charts",
     route: "/charts"
+  },
+  {
+    title: "Team",
+    route: "/team"
   }
 
 

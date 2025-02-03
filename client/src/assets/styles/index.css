@@ -6,17 +6,12 @@ Standard Dome Gold: #c99700
 Irish Green: #00843d
  */
 
-
-
-
 /* General Styling */
-
-body{
+body {
   margin: 0px;
 }
 
-
-/* Target styling*/
+/* Target styling */
 .target-container {
   display: flex;
   align-items: center;
@@ -72,17 +67,15 @@ body{
   background-color: #003087;
 }
 
-.selected-ring{
+.selected-ring {
   background-color: #c99700;
 }
 
-.ring:hover{
+.ring:hover {
   transform: scale(1.1);
-
 }
 
 /* NavBar styling */
-
 .nav-container {
   display: flex;
   justify-content: center;
@@ -93,7 +86,6 @@ body{
 }
 
 .nav-item {
-  
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -112,4 +104,110 @@ body{
 .nav-item.active {
   background-color: #00843d;
   color: white;
+}
+
+/*Team Page Styling*/ 
+
+/* Container for the Score Page */
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Team Name Styling */
+.teamName {
+  color: blue;
+  font-family: cursive; /* Handwritten-style font */
+  font-size: 3rem;
+  margin: 0;
+  display: inline-block;
+}
+
+/* Edit Container for the Team Name */
+.editContainer {
+  margin-left: 10px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1rem;
+  color: gray;
+}
+
+/* Pencil Icon Styling */
+.pencilIcon {
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+/* Edit Text Styling */
+.editText {
+  vertical-align: middle;
+}
+
+/* Edit Input Styling */
+.editInput {
+  font-size: 2rem;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+/* Target Container (for centering the Target component) */
+.targetContainer {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Grid Container for Score Options */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* Score Item Styling */
+.scoreItem {
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Number Display Styling */
+.number {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: black;
+}
+
+/* Count Text Styling */
+.countText {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+/* Plus Button Styling */
+.plusButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #0c2340;
+  margin: 0 auto;
+}
+
+/* Plus Sign Styling */
+.plusSign {
+  color: #c99700;
+  font-size: 1.5rem;
 }

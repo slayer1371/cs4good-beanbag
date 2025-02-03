@@ -3,11 +3,12 @@ import NavBar from "./NavBar";
 
 function ChartPage(){
   const [data, setData] = useState({});
-
-  useEffect(()=>{
-    //fetch data using mongo here 
-
-  },[])
+  useEffect(() => {
+    // Example: Fetch teams from backend
+    //fetchTeams();
+    // Example: Fetch current scores from backend
+    //fetchScores();
+  }, []);
 
   return(
     <div>
