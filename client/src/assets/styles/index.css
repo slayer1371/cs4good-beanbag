@@ -9,6 +9,9 @@ Irish Green: #00843d
 /* General Styling */
 body {
   margin: 0px;
+  background-color: #b0b0b0;
+  background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 /* Target styling */
@@ -16,8 +19,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90vh;
-  background-color: #f0f0f0;
+  height: auto;
 }
 
 .target {
@@ -104,6 +106,97 @@ body {
 .nav-item.active {
   background-color: #00843d;
   color: white;
+}
+
+/* Dropdown Styling */
+
+.team-dropdown-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
+
+}
+
+.team-dropdown {
+  font-size: 100px; 
+  font-weight: bold;
+  border: none;
+  background: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+/* Score Buttons Styling */
+.score-buttons-container{
+  display:flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  gap:10px;
+  width: 400px;
+}
+
+.button-header-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+ 
+}
+
+.button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+
+}
+
+.button-header-container h1{
+  font-size: 20px;
+}
+
+.score-button {
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: #0c2340;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1.5rem;
+  width: auto;
+}
+
+button:hover {
+  transform: scale(1.1);
+
+}
+
+.selected-button{
+  background-color: #c99700;
+  font-weight: bold;
+}
+
+.submit-button{
+  align-self: flex-end;
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: #0c2340;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1.5rem;
+  width: auto;
 }
 
 /*Team Page Styling*/ 
