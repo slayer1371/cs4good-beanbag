@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Chart from "chart.js/auto";
-import { Colors } from "chart.js";
 
 function ChartPage() {
   const [data, setData] = useState([
@@ -10,6 +9,7 @@ function ChartPage() {
     { team: "Third", score: 31 },
     { team: "Fourth", score: 18 },
   ]);
+
   const colors = ["#0C2340", "#0A2355", "#06268A", "#042B96"];
 
   function BarChart(scores) {
@@ -19,7 +19,6 @@ function ChartPage() {
       type: "bar",
       options: {
         animation: true,
-
         scales: {
           x: {
             grid: {
@@ -48,20 +47,54 @@ function ChartPage() {
     });
   }
 
-  useEffect(() => {
-    // Example: Fetch teams from backend
-    //fetchTeams();
-    // Example: Fetch current scores from backend
-    //fetchScores();
-    console.log("Hi");
-    BarChart(data);
-    var mean = 0;
-    data.map((el) => {
-      mean += el.score;
+  function LineChart() {
+    const timeLabels = Array.from({ length: 10 }, (_, i) => `T${i + 1}`);
+    const randomScores = Array.from({ length: 10 }, () => Math.floor(Math.random() * 50));
+
+    new Chart(document.getElementById("lineChart"), {
+      type: "line",
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Time",
+              color: "black",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Score",
+              color: "black",
+            },
+            min: 0,
+            max: 50,
+          },
+        },
+      },
+      data: {
+        labels: timeLabels,
+        datasets: [
+          {
+            label: "Score Over Time",
+            data: randomScores,
+            borderColor: "#06268A",
+            backgroundColor: "rgba(6, 38, 138, 0.3)",
+            borderWidth: 2,
+            pointRadius: 5,
+            pointBackgroundColor: "#042B96",
+          },
+        ],
+      },
     });
-    mean = mean / data.length;
-    console.log(mean);
-  }, [100]);
+  }
+
+  useEffect(() => {
+    BarChart(data);
+    LineChart();
+  }, []);
 
   return (
     <div>
@@ -73,4 +106,5 @@ function ChartPage() {
     </div>
   );
 }
+
 export default ChartPage;
