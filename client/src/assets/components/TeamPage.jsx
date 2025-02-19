@@ -1,97 +1,70 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
-import Target from "./Target";
-import '../styles/index.css'
+import "../styles/index.css";
 
 function TeamPage() {
-  // State for the team name and its editing mode
-  const [teamName, setTeamName] = useState("Team A");
-  const [isEditing, setIsEditing] = useState(false);
+  const [teamName, setTeamName] = useState("");
+  const [message, setMessage] = useState(""); // Feedback message
+  const [teamList, setTeamList] = useState([]); // List of registered teams
 
-  // State for the score counts for each option (0-5)
-  const [scoreCounts, setScoreCounts] = useState({
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-  });
+  // Fetch existing teams on load
+  useEffect(() => {
+    fetch("http://localhost:3000/get_teams")
+      .then((response) => response.json())
+      .then((data) => setTeamList(data))
+      .catch((error) => console.error("Error fetching teams:", error));
+  }, []);
 
+  const handleRegisterTeam = () => {
+    if (!teamName.trim()) {
+      setMessage("Team name cannot be empty.");
+      return;
+    }
 
-  // State for tracking the currently selected ring (for Target component)
-  const [selectedRing, setSelectedRing] = useState(-1);
+    fetch("http://localhost:3000/register_team", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: teamName }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          setMessage(`${data.error}`);
+        } else {
+          setMessage(`${data.message}`);
+          setTeamList([...teamList, teamName]); // Update team list
+        }
+      })
+      .catch((error) => {
+        console.error("Error registering team:", error);
+        setMessage("Failed to register team.");
+      });
 
-  // Increments the count for a specific score, could add post to mongo
-  const handleScoreIncrement = (num) => {
-    setScoreCounts((prev) => ({
-      ...prev,
-      [num]: prev[num] + 1,
-    }));
-  };
-
-  // Updates the selected ring
-  const handleRingClick = (ringId) => {
-    setSelectedRing(ringId);
-  };
-
-  // Toggle editing mode when the edit option is clicked
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  // Update the team name while editing
-  const handleNameChange = (e) => {
-    setTeamName(e.target.value);
-  };
-
-  // End editing when the input stops
-  const handleNameBlur = () => {
-    setIsEditing(false);
+    setTeamName(""); // Clear input
   };
 
   return (
     <div className="container">
       <NavBar />
-
-      <div className="header">
-        <h1 className="teamName">
-          {teamName}
-          <span className="editContainer" onClick={handleEditClick}>
-            <span className="pencilIcon">✏️</span>
-            <span className="editText"> edit name</span>
-          </span>
-        </h1>
-        {isEditing && (
-          <input
-            type="text"
-            value={teamName}
-            onChange={handleNameChange}
-            onBlur={handleNameBlur}
-            autoFocus
-            className="editInput"
-          />
-        )}
-      </div>
-
-      <div className="targetContainer">
-        <Target
-          selectedRing={selectedRing}
-          setSelectedRing={setSelectedRing}
-          onRingClick={handleRingClick}
+      <div className="registerContainer">
+        <h1>Register a Team</h1>
+        <input
+          type="text"
+          value={teamName}
+          onChange={(e) => setTeamName(e.target.value)}
+          placeholder="Enter team name"
         />
+        <button onClick={handleRegisterTeam}>Register</button>
+        <p className="message">{message}</p>
       </div>
 
-      {/* Grid of Score Options */}
-      <div className="gridContainer">
-        {[0, 1, 2, 3, 4].map((num) => (
-          <div key={num} className="scoreItem">
-            <div className="number">{num}</div>
-            <div className="countText">{scoreCounts[num]}</div>
-            <button className="plusButton" onClick={() => handleScoreIncrement(num)}>
-              <span className="plusSign">+</span>
-            </button>
-          </div>
-        ))}
+      <div className="teamList">
+        <h2>Registered Teams</h2>
+        <ul>
+          {teamList.map((team, index) => (
+            <li key={index}>{team}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
