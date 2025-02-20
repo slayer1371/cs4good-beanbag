@@ -34,6 +34,8 @@ def register_team():
 
     # Insert team into MongoDB
     teams_collection.insert_one({"name": team_name})
+    # builds skeleton for each team score -> is team_collection necessary?
+    scores_collection.inser_one({"name": team_name, "scores":[]})
     return jsonify({"message": f"Team '{team_name}' registered successfully!"}), 201
 
 @app.route("/get_teams", methods=["GET"])
@@ -47,14 +49,22 @@ def get_teams():
 #Score logic still needs to be figured out 
 @app.route("/submit_score", methods=["POST"])
 def submit_score():
-    pass
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight success"}), 200
+    data = request.json
+    team_name = data.get("name")
+    score = data.get("score")
+    scores_collection.updateOne({"name":team_name},{"$push":{"scores":score}})
+    return jsonify({"message": f"Score of '{score}' added to '{team_name}' successfully!"}), 201
+ 
 
 @app.route("/get_scores", methods=["GET"])
 def get_scores():
-    return jsonify(get_all_scores())
-
-def get_all_scores():
-    pass
+    score_data =  scores_collection.find({},{"_id": 0, "name": 0, "scores": 1})
+    return jsonify([item["scores"] for item in score_data])
+# do we need?
+# def get_all_scores():
+#     scores_collection.find({},{"_id": 0})
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=3000, debug=True)
