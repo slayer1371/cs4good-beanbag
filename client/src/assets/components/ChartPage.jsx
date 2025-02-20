@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Chart from "chart.js/auto";
+import axios from "axios";
 
 function ChartPage() {
+
+  
+
   const [data, setData] = useState([
     { team: "First", score: 10 },
     { team: "Second", score: 3 },
@@ -11,6 +15,16 @@ function ChartPage() {
   ]);
 
   const colors = ["#0C2340", "#0A2355", "#06268A", "#042B96"];
+
+  
+  useEffect(()=>{
+    const getChartData = async ()=>{
+      const response = await axios.get("http://localhost:3000/get_scores");
+      setData(response.data);
+    }
+    getChartData();
+
+  },[]);
 
   function BarChart(scores) {
     Chart.defaults.font.size = 14;

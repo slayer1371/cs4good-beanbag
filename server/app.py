@@ -60,8 +60,8 @@ def submit_score():
 
 @app.route("/get_scores", methods=["GET"])
 def get_scores():
-    score_data =  scores_collection.find({},{"_id": 0, "name": 0, "scores": 1})
-    return jsonify([item["scores"] for item in score_data])
+    score_data =  scores_collection.find({},{"_id": 0, "name": 1, "scores": 1})
+    return score_data
 # do we need?
 # def get_all_scores():
 #     scores_collection.find({},{"_id": 0})

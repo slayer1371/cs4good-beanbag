@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
 function ScoreButtons(props){
 
   const [curButton, setCurButton] = useState(-1);
 
   const Buttons = [0,1,2,3,4]
+
 
   useEffect(()=>{
     setCurButton(props.selectedRing)
@@ -13,6 +14,7 @@ function ScoreButtons(props){
   const handleClick = (event)=>{
     props.setSelectedRing(event.value);
   }
+
 
   return(
     <div className="score-buttons-container">

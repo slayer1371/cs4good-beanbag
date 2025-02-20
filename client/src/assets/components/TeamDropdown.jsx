@@ -12,6 +12,8 @@ const TeamDropdown = (props) => {
     setCurrentTeam(props.selectedTeam);
   },[props.selectedTeam])
 
+ 
+
   return (
     <div className="team-dropdown-container">
       <select 

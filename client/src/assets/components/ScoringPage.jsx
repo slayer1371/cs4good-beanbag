@@ -11,7 +11,14 @@ function ScoringPage(){
   const [score, setScore] = useState(0);
 
   useEffect(()=>{
-    //fetch data with mongo here
+    const getTeams = async ()=>{
+      const response = await axios.get("http://localhost:3000/get_teams");
+      //is this an array??
+      setTeamList(response.data);
+    }
+    //also fetch score/statistics here
+    getTeams();
+
   },[]);
 
   const submitScore = ()=>{
