@@ -5,17 +5,36 @@ import { Colors } from "chart.js";
 
 function ChartPage() {
   const [data, setData] = useState([
-    { team: "First", score: [0,0,0,0,0] },
-    { team: "Second", score: [0,0,0,0,0] },
-    { team: "Third", score: [0,0,0,0,0] },
-    { team: "Fourth", score: [0,0,0,0,0] },
+    { team: "First", score: [0, 0, 0, 0] },
+    { team: "Second", score: [1, 0, 5, 0] },
+    { team: "Third", score: [0, 0, 0, 0] },
+    { team: "Fourth", score: [0, 0, 4, 0] },
   ]);
+  const [mean, setMean] = useState([]);
   const colors = ["#0C2340", "#0A2355", "#06268A", "#042B96"];
-
-  function BarChart(scores) {
+  var i = 0;
+  var bar;
+  useEffect(() => {
+    function RandomInt() {
+      var int = Math.floor(Math.random() * 10);
+      return int;
+    }
+    setInterval(() => {
+      setData([
+        { team: "First", score: [RandomInt(), 0, 0, RandomInt()] },
+        { team: "Second", score: [1, 0, 5, 0] },
+        { team: "Third", score: [RandomInt(), 0, RandomInt(), 0] },
+        { team: "Fourth", score: [RandomInt(), RandomInt(), 4, 0] },
+      ]);
+    }, 5000);
+  }, [0]);
+  useEffect(() => {
+    console.log(mean);
+    console.log(mean.map((row) => row));
     Chart.defaults.font.size = 14;
     Chart.defaults.color = "black";
-    new Chart(document.getElementById("barChart"), {
+
+    new Chart(barChart, {
       type: "bar",
       options: {
         animation: true,
@@ -34,11 +53,11 @@ function ChartPage() {
         },
       },
       data: {
-        labels: scores.map((row) => row.team),
+        labels: data.map((row) => row.team),
         datasets: [
           {
             label: "Points Scored",
-            data: scores.map((row) => row.score),
+            data: mean.map((row) => row),
             backgroundColor: colors,
             borderColor: "black",
             borderWidth: 5,
@@ -46,22 +65,29 @@ function ChartPage() {
         ],
       },
     });
-  }
+  }, [mean]);
 
   useEffect(() => {
+    Chart.getChart("barChart").destroy();
+    setMean([]);
     // Example: Fetch teams from backend
     //fetchTeams();
     // Example: Fetch current scores from backend
     //fetchScores();
     console.log("Hi");
-    BarChart(data);
-    var mean = 0;
+    var finalmean = [];
     data.map((el) => {
-      mean += el.score;
+      var localmean = 0;
+      console.log(el.score);
+      el.score.map((val) => {
+        localmean += val;
+      });
+      localmean = localmean / el.score.length;
+      finalmean.push(localmean);
+      console.log(localmean);
+      setMean([...finalmean, finalmean[-1]]);
     });
-    mean = mean / data.length;
-    console.log(mean);
-  }, [100]);
+  }, [data]);
 
   return (
     <div>
