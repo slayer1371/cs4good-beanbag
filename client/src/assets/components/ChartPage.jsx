@@ -5,10 +5,10 @@ import { Colors } from "chart.js";
 
 function ChartPage() {
   const [data, setData] = useState([
-    { team: "First", score: 10 },
-    { team: "Second", score: 3 },
-    { team: "Third", score: 31 },
-    { team: "Fourth", score: 18 },
+    { team: "First", score: [0,0,0,0,0] },
+    { team: "Second", score: [0,0,0,0,0] },
+    { team: "Third", score: [0,0,0,0,0] },
+    { team: "Fourth", score: [0,0,0,0,0] },
   ]);
   const colors = ["#0C2340", "#0A2355", "#06268A", "#042B96"];
 
