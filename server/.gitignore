@@ -1,0 +1,20 @@
+# Ignore the virtual environment folder
+.venv/
+.env
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+
+# Editor-specific files
+.vscode/
+.idea/
+*.swp
+
+# Logs & system files
+*.log
+.DS_Store
+
+# Python virtual environment-related
+Pipfile
+Pipfile.lock
