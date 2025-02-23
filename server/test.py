@@ -1,9 +1,11 @@
-import requests
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
-url = 'http://127.0.0.1:5000/test'
-json_data = {'P_OneScore': 5, 'P_TwoScore': 5}
+uri = "mongodb+srv://bforseth:sTh4uYbQx72OaClx@beanbagcluster.lsads.mongodb.net/?retryWrites=true&w=majority&appName=BeanbagCluster"
 
-response = requests.post(url, json=json_data)
-
-print('Status Code:', response.status_code)
-print('Response JSON:', response.json())
+try:
+    client = MongoClient(uri, server_api=ServerApi('1'))
+    client.admin.command('ping')
+    print("Connected to MongoDB!")
+except Exception as e:
+    print(f"Connection failed: {e}")

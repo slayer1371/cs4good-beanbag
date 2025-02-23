@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import "../styles/index.css";
+import axios from "axios";
 
 function TeamPage() {
   const [teamName, setTeamName] = useState("");
@@ -9,42 +10,39 @@ function TeamPage() {
 
   // Fetch existing teams on load
   useEffect(() => {
-    fetch("http://localhost:3000/get_teams")
-      .then((response) => response.json())
-      .then((data) => setTeamList(data))
-      .catch((error) => console.error("Error fetching teams:", error));
+    const fetchTeamNames = async () => {
+      const response = await axios.get("http://localhost:8080/get_teams");
+      setTeamList(response.data);
+    };
+    fetchTeamNames();
   }, []);
 
-  const handleRegisterTeam = () => {
+  const handleRegisterTeam = async ()  => {
+    
     if (!teamName.trim()) {
       setMessage("Team name cannot be empty.");
       return;
     }
-
-    fetch("http://localhost:3000/register_team", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: teamName }),
+    if (teamList.includes(teamName)) {
+      setMessage("Team name already registered.");
+      return;
+    }
+    const data = {
+      name: teamName,
+    };
+    const response = await axios.post(
+      "http://localhost:8080/register_team",
+      data
+    );
+    setTeamList((prevValue)=>{
+      return([...prevValue, teamName])
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          setMessage(`${data.error}`);
-        } else {
-          setMessage(`${data.message}`);
-          setTeamList([...teamList, teamName]); // Update team list
-        }
-      })
-      .catch((error) => {
-        console.error("Error registering team:", error);
-        setMessage("Failed to register team.");
-      });
-
     setTeamName(""); // Clear input
+
   };
 
   return (
-    <div className="container">
+    <div>
       <NavBar />
       <div className="registerContainer">
         <h1>Register a Team</h1>
