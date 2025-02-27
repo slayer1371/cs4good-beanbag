@@ -1,18 +1,16 @@
 from flask import Flask, request, jsonify
-# from flask_socketio import SocketIO, emit
 from pymongo import MongoClient
-from flask_cors import CORS
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-#Socket.io is for future real time score tracking using websockets, will look more into it 
 app = Flask(__name__)
-CORS(app)
-# socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Connect to MongoDB
-password = 'sTh4uYbQx72OaClx'
-uri = "mongodb+srv://bforseth:"+password+"@beanbagcluster.lsads.mongodb.net/?retryWrites=true&w=majority&appName=BeanbagCluster"
+# password = 'sTh4uYbQx72OaClx'
+# uri = "mongodb+srv://bforseth:"+password+"@beanbagcluster.lsads.mongodb.net/?retryWrites=true&w=majority&appName=BeanbagCluster"
+
+uri = "mongodb+srv://xbriggs:5fnz7AesTp1DYyFx@teamscoredb.gkrjr.mongodb.net/TeamScoreDB?retryWrites=true&w=majority&appName=TeamScoreDB&authSource=admin"
+
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -23,16 +21,19 @@ try:
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
+# Brandon's db collections
+# db = client["BeanbagData"]
+# teams_collection = db["Team_Data"]
+# scores_collection = db["Score_Data"]
 
-db = client["BeanbagData"]
-teams_collection = db["Team_Data"]
-scores_collection = db["Score_Data"]
+#Xavier's db collections
+db = client["beanbag_toss"]
+teams_collection = db["teams"]
+scores_collection = db["scores"]
 
 #Team Logic
 @app.route("/register_team", methods=["POST"])
 def register_team():
-    if request.method == "OPTIONS":
-        return jsonify({"message": "CORS preflight success"}), 200
     """Register a new team into the database."""
     data = request.json
     team_name = data.get("name")
@@ -52,8 +53,6 @@ def register_team():
 
 @app.route("/get_teams", methods=["GET"])
 def get_teams():
-    if request.method == "OPTIONS":
-        return jsonify({"message": "CORS preflight success"}), 200
     """Retrieve all registered teams."""
     teams = list(teams_collection.find({}, {"_id": 0, "name": 1}))
     return jsonify([team["name"] for team in teams]), 200
@@ -61,8 +60,6 @@ def get_teams():
 #Score logic still needs to be figured out 
 @app.route("/submit_score", methods=["POST"])
 def submit_score():
-    if request.method == "OPTIONS":
-        return jsonify({"message": "CORS preflight success"}), 200
     data = request.json
     team_name = data.get("name")
     score = data.get("score")
@@ -72,13 +69,8 @@ def submit_score():
 
 @app.route("/get_scores", methods=["GET", "OPTIONS"])
 def get_scores():
-    if request.method == "OPTIONS":
-        return jsonify({"message": "CORS preflight success"}), 200
     score_data = list(scores_collection.find({}, {"_id": 0, "name": 1, "scores": 1}))
     return jsonify(score_data), 200
-# do we need?
-# def get_all_scores():
-#     scores_collection.find({},{"_id": 0})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

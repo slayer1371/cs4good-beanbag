@@ -11,21 +11,20 @@ function ScoringPage(){
   const [selectedRing, setSelectedRing] = useState(-1);
   const [score, setScore] = useState(0);
 
-  useEffect(()=>{
-    const getTeams = async ()=>{
-      const response = await axios.get("http://localhost:8080/get_teams");
-      setTeamList(response.data);
-    }
-    const getScore = async ()=>{
-      const response = await axios.get("http://localhost:8080/get_scores");
-      console.log(response.data);
-      setScore();
-    }
-    //also fetch score/statistics here
+  useEffect(() => {
+    // Fetch teams from the backend
+    const getTeams = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/get_teams");
+        if (Array.isArray(response.data)) {
+          setTeamList(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching teams:", error);
+      }
+    };
     getTeams();
-    getScore();
-
-  },[]);
+  }, []);
 
   const submitScore = async ()=>{
     if(selectedTeam != "invalid"){

@@ -1,38 +1,45 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Chart from "chart.js/auto";
-import axios from "axios";
+import { Colors } from "chart.js";
 
 function ChartPage() {
-
-  
-
   const [data, setData] = useState([
-    { team: "First", score: 10 },
-    { team: "Second", score: 3 },
-    { team: "Third", score: 31 },
-    { team: "Fourth", score: 18 },
+    { team: "FirstTeam", score: [0, 0, 0, 0] },
+    { team: "SecondTeam", score: [1, 0, 5, 0] },
+    { team: "Third", score: [0, 0, 0, 0] },
+    { team: "Fourth", score: [0, 0, 4, 0] },
   ]);
-
+  const [mean, setMean] = useState([]);
   const colors = ["#0C2340", "#0A2355", "#06268A", "#042B96"];
+  var i = 0;
+  var bar;
+  // useEffect(() => {
+  //   function RandomInt() {
+  //     var int = Math.floor(Math.random() * 10);
+  //     return int;
+  //   }
+  //   setInterval(() => {
+  //     setData([
+  //       { team: "First", score: [RandomInt(), 0, 0, RandomInt()] },
+  //       { team: "Second", score: [1, 0, 5, 0] },
+  //       { team: "Third", score: [RandomInt(), 0, RandomInt(), 0] },
+  //       { team: "Fourth", score: [RandomInt(), RandomInt(), 4, 0] },
+  //     ]);
+  //   }, 5000);
+  // }, []);
 
-  
-  useEffect(()=>{
-    const getChartData = async ()=>{
-      const response = await axios.get("http://localhost:3000/get_scores");
-      setData(response.data);
-    }
-    getChartData();
-
-  },[]);
-
-  function BarChart(scores) {
+  useEffect(() => {
+    console.log(mean);
+    console.log(mean.map((row) => row));
     Chart.defaults.font.size = 14;
     Chart.defaults.color = "black";
-    new Chart(document.getElementById("barChart"), {
+
+    new Chart(barChart, {
       type: "bar",
       options: {
         animation: true,
+
         scales: {
           x: {
             grid: {
@@ -47,11 +54,11 @@ function ChartPage() {
         },
       },
       data: {
-        labels: scores.map((row) => row.team),
+        labels: data.map((row) => row.team),
         datasets: [
           {
             label: "Points Scored",
-            data: scores.map((row) => row.score),
+            data: mean.map((row) => row),
             backgroundColor: colors,
             borderColor: "black",
             borderWidth: 5,
@@ -59,56 +66,29 @@ function ChartPage() {
         ],
       },
     });
-  }
-
-  function LineChart() {
-    const timeLabels = Array.from({ length: 10 }, (_, i) => `T${i + 1}`);
-    const randomScores = Array.from({ length: 10 }, () => Math.floor(Math.random() * 50));
-
-    new Chart(document.getElementById("lineChart"), {
-      type: "line",
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: "Time",
-              color: "black",
-            },
-          },
-          y: {
-            title: {
-              display: true,
-              text: "Score",
-              color: "black",
-            },
-            min: 0,
-            max: 50,
-          },
-        },
-      },
-      data: {
-        labels: timeLabels,
-        datasets: [
-          {
-            label: "Score Over Time",
-            data: randomScores,
-            borderColor: "#06268A",
-            backgroundColor: "rgba(6, 38, 138, 0.3)",
-            borderWidth: 2,
-            pointRadius: 5,
-            pointBackgroundColor: "#042B96",
-          },
-        ],
-      },
-    });
-  }
+  }, [mean]);
 
   useEffect(() => {
-    BarChart(data);
-    LineChart();
-  }, []);
+    Chart.getChart("barChart").destroy();
+    setMean([]);
+    // Example: Fetch teams from backend
+    //fetchTeams();
+    // Example: Fetch current scores from backend
+    //fetchScores();
+    console.log("Hi");
+    var finalmean = [];
+    data.map((el) => {
+      var localmean = 0;
+      console.log(el.score);
+      el.score.map((val) => {
+        localmean += val;
+      });
+      localmean = localmean / el.score.length;
+      finalmean.push(localmean);
+      console.log(localmean);
+      setMean([...finalmean, finalmean[-1]]);
+    });
+  }, [data]);
 
   return (
     <div>
@@ -120,5 +100,4 @@ function ChartPage() {
     </div>
   );
 }
-
 export default ChartPage;
