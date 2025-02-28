@@ -15,7 +15,7 @@ function ScoringPage(){
     // Fetch teams from the backend
     const getTeams = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/get_teams");
+        const response = await axios.get("http://localhost:8080/get_teams");
         if (Array.isArray(response.data)) {
           setTeamList(response.data);
         }
