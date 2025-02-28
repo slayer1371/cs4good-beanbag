@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Connect to MongoDB
 # password = 'sTh4uYbQx72OaClx'
@@ -34,6 +36,8 @@ scores_collection = db["scores"]
 #Team Logic
 @app.route("/register_team", methods=["POST"])
 def register_team():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight success"}), 200
     """Register a new team into the database."""
     data = request.json
     team_name = data.get("name")
@@ -53,6 +57,8 @@ def register_team():
 
 @app.route("/get_teams", methods=["GET"])
 def get_teams():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight success"}), 200
     """Retrieve all registered teams."""
     teams = list(teams_collection.find({}, {"_id": 0, "name": 1}))
     return jsonify([team["name"] for team in teams]), 200
@@ -60,6 +66,8 @@ def get_teams():
 #Score logic still needs to be figured out 
 @app.route("/submit_score", methods=["POST"])
 def submit_score():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight success"}), 200
     data = request.json
     team_name = data.get("name")
     score = data.get("score")
@@ -69,6 +77,8 @@ def submit_score():
 
 @app.route("/get_scores", methods=["GET", "OPTIONS"])
 def get_scores():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight success"}), 200
     score_data = list(scores_collection.find({}, {"_id": 0, "name": 1, "scores": 1}))
     return jsonify(score_data), 200
 
