@@ -8,7 +8,7 @@ import axios from "axios";
 function ScoringPage() {
   const [submitting, setSubmitting] = useState(false);
   const [teamList, setTeamList] = useState([]);
-  const [selectedTeam, setSelectedTeam] = useState("invalid");
+  const [selectedTeam, setSelectedTeam] = useState("");
   const [selectedRing, setSelectedRing] = useState(-1);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function ScoringPage() {
   }, []);
 
   const submitScore = async () => {
-    if (selectedTeam != "invalid") {
+    if (selectedTeam && selectedTeam !== "") {
       if (selectedRing != -1) {
         setSubmitting(true);
         try{

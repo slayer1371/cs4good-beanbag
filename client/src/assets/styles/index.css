@@ -130,20 +130,79 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 10px 0px;
+  margin: 20px 0px;
 }
 
 .team-dropdown {
-  font-size: 100px;
-  font-weight: bold;
-  border: none;
-  background: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  border: 2px solid #0c4891;
+  background-color: white;
+  color: #0c2340;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding: 5px 10px;
-  text-align: center;
+  padding: 12px 40px 12px 20px;
+  text-align: left;
+  border-radius: 8px;
+  min-width: 250px;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230c2340' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+}
+
+.team-dropdown:hover {
+  border-color: #c99700;
+  box-shadow: 0 2px 8px rgba(12, 35, 64, 0.2);
+}
+
+.team-dropdown:focus {
+  outline: none;
+  border-color: #c99700;
+  box-shadow: 0 0 0 3px rgba(201, 151, 0, 0.2);
+}
+
+.team-dropdown option {
+  padding: 10px;
+  background-color: white;
+  color: #0c2340;
+}
+
+.team-dropdown.team-green {
+  background-color: #00843d;
+  color: white;
+  border-color: #00843d;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+.team-dropdown.team-green:hover {
+  background-color: #006b31;
+  border-color: #006b31;
+}
+
+.team-dropdown.team-green:focus {
+  border-color: #006b31;
+  box-shadow: 0 0 0 3px rgba(0, 132, 61, 0.3);
+}
+
+.team-dropdown.team-blue {
+  background-color: #0c4891;
+  color: white;
+  border-color: #0c4891;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+.team-dropdown.team-blue:hover {
+  background-color: #0a3a7a;
+  border-color: #0a3a7a;
+}
+
+.team-dropdown.team-blue:focus {
+  border-color: #0a3a7a;
+  box-shadow: 0 0 0 3px rgba(12, 72, 145, 0.3);
 }
 
 /* Score Buttons Styling */
@@ -418,8 +477,9 @@ button:hover {
 
   /* Reduce dropdown font-size for mobile */
   .team-dropdown {
-    font-size: 40px;
-    padding: 5px 10px;
+    font-size: 1.2rem;
+    padding: 10px 35px 10px 15px;
+    min-width: 200px;
   }
 
   /* Score Buttons container becomes narrower */
