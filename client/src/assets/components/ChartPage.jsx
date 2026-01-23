@@ -11,7 +11,7 @@ function ChartPage() {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get("https://cs4good-beanbag.onrender.com/get_scores");
+        const response = await axios.get("https://cs4good-beanbag-codt.onrender.com/get_scores");
         if (response.data) {
           console.log(response.data);
           setData(response.data);

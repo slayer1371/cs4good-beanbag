@@ -11,7 +11,7 @@ function TeamPage() {
   // Fetch existing teams on load
   useEffect(() => {
     const fetchTeamNames = async () => {
-      const response = await axios.get("https://cs4good-beanbag.onrender.com/get_teams");
+      const response = await axios.get("https://cs4good-beanbag-codt.onrender.com/get_teams");
       setTeamList(response.data);
     };
     fetchTeamNames();
@@ -30,7 +30,7 @@ function TeamPage() {
       name: teamName,
     };
     const response = await axios.post(
-      "https://cs4good-beanbag.onrender.com/register_team",
+      "https://cs4good-beanbag-codt.onrender.com/register_team",
       data
     );
     setTeamList((prevValue) => {

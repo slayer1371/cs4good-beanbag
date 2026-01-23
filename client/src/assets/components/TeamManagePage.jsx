@@ -13,7 +13,7 @@ function TeamManagePage() {
   useEffect(() => {
     
     const fetchTeamNames = async () => {
-      const response = await axios.get("https://cs4good-beanbag.onrender.com/get_teams");
+      const response = await axios.get("https://cs4good-beanbag-codt.onrender.com/get_teams");
       setTeamList(response.data);
     };
     fetchTeamNames();
@@ -34,7 +34,7 @@ function TeamManagePage() {
       name: name,
     };
     const response = await axios.post(
-      "https://cs4good-beanbag.onrender.com/delete_team",
+      "https://cs4good-beanbag-codt.onrender.com/delete_team",
       data
     );
     setTeamList((prevValue) => prevValue.filter((team) => team !== name));

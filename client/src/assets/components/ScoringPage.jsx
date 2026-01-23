@@ -15,7 +15,7 @@ function ScoringPage() {
     // Fetch teams from the backend
     const getTeams = async () => {
       try {
-        const response = await axios.get("https://cs4good-beanbag.onrender.com/get_teams");
+        const response = await axios.get("https://cs4good-beanbag-codt.onrender.com/get_teams");
         if (Array.isArray(response.data)) {
           setTeamList(response.data);
         }
@@ -35,7 +35,7 @@ function ScoringPage() {
             name: selectedTeam,
             score: selectedRing,
           };
-          axios.post("https://cs4good-beanbag.onrender.com/submit_score", data);
+          axios.post("https://cs4good-beanbag-codt.onrender.com/submit_score", data);
           console.log("Submit");
         }finally{
           setSelectedRing(-1);
